@@ -1,4 +1,4 @@
-/* SPACE TEC Identity & Styles */
+/* SPACE TEC Identity & Styles - v2 */
 :root {
   --azul-espacial: #14243B;
   --azul-profundo: #09121d;
@@ -11,7 +11,7 @@
   --gris-claro: #e2e8f0;
   --gris-muted: #94a3b8;
   --hud-border: rgba(215, 181, 104, 0.3);
-  --hud-glass: rgba(20, 36, 59, 0.75);
+  --hud-glass: rgba(20, 36, 59, 0.78);
   --font-hud: 'Orbitron', monospace;
   --font-tech: 'Rajdhani', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -32,16 +32,19 @@ body {
   line-height: 1.6;
 }
 
+/* --------------------------------------------------------------------------
+   HEADER & NAVBAR CON LOGO PRINCIPAL
+   -------------------------------------------------------------------------- */
 .hud-header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
-  background: rgba(9, 18, 29, 0.88);
-  backdrop-filter: blur(12px);
+  background: rgba(9, 18, 29, 0.92);
+  backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--hud-border);
-  padding: 0.75rem 2rem;
+  padding: 0.65rem 2rem;
   transition: all 0.3s ease;
 }
 
@@ -53,10 +56,47 @@ body {
   justify-content: space-between;
 }
 
-.brand-logo {
-  height: 48px;
-  width: auto;
-  filter: drop-shadow(0 0 10px rgba(215, 181, 104, 0.3));
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  text-decoration: none;
+}
+
+.brand-logo-main {
+  height: 52px;
+  width: 52px;
+  border-radius: 50%;
+  border: 2px solid var(--dorado);
+  box-shadow: 0 0 15px rgba(215, 181, 104, 0.4);
+  background: #14243B;
+  transition: transform 0.3s ease;
+}
+
+.brand:hover .brand-logo-main {
+  transform: scale(1.06) rotate(5deg);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-family: var(--font-hud);
+  font-size: 1.3rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(215, 181, 104, 0.5);
+}
+
+.brand-subtitle {
+  font-family: var(--font-tech);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--naranja);
+  letter-spacing: 2px;
 }
 
 .nav-links {
@@ -136,10 +176,13 @@ body {
   box-shadow: 0 0 24px rgba(241, 107, 47, 0.7);
 }
 
+/* --------------------------------------------------------------------------
+   ESCENARIO HERO LUNAR
+   -------------------------------------------------------------------------- */
 .lunar-hero {
   position: relative;
   min-height: 100vh;
-  padding-top: 100px;
+  padding-top: 110px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -195,10 +238,10 @@ body {
 
 .earth-distant {
   position: absolute;
-  top: 15%;
+  top: 14%;
   right: 12%;
-  width: 90px;
-  height: 90px;
+  width: 95px;
+  height: 95px;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #5bc0be 0%, #1c3d5a 60%, #0d1b2a 100%);
   box-shadow: 0 0 25px rgba(91, 192, 190, 0.4), inset -10px -10px 20px rgba(0, 0, 0, 0.8);
@@ -220,8 +263,7 @@ body {
   z-index: 10;
   text-align: center;
   max-width: 900px;
-  padding: 1.5rem 1.5rem 0.5rem;
-  margin-top: 1rem;
+  padding: 1rem 1.5rem 0.5rem;
 }
 
 .badge-pill {
@@ -236,7 +278,7 @@ body {
   font-size: 0.75rem;
   letter-spacing: 2px;
   color: var(--dorado);
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
   backdrop-filter: blur(6px);
 }
 
@@ -248,9 +290,42 @@ body {
   box-shadow: 0 0 8px var(--naranja);
 }
 
+/* VITRINA DEL LOGO PRINCIPAL */
+.hero-logo-showcase {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-orbit-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px dashed rgba(215, 181, 104, 0.6);
+  animation: rotateSlow 24s linear infinite;
+}
+
+.hero-main-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 25px rgba(215, 181, 104, 0.6));
+  animation: pulseLogo 4s ease-in-out infinite alternate;
+}
+
+@keyframes pulseLogo {
+  0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(215, 181, 104, 0.5)); }
+  100% { transform: scale(1.04); filter: drop-shadow(0 0 30px rgba(241, 107, 47, 0.7)); }
+}
+
 .hero-title {
   font-family: var(--font-hud);
-  font-size: 4rem;
+  font-size: 3.8rem;
   font-weight: 900;
   letter-spacing: 4px;
   line-height: 1.1;
@@ -270,7 +345,7 @@ body {
 
 .hero-slogan {
   font-family: var(--font-tech);
-  font-size: 1.6rem;
+  font-size: 1.55rem;
   font-weight: 500;
   color: #cbd5e1;
   max-width: 780px;
@@ -279,6 +354,7 @@ body {
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
 }
 
+/* RELOJ HUD PRECISO Y SERENO */
 .hud-clock-card {
   background: var(--hud-glass);
   border: 1px solid var(--hud-border);
@@ -348,7 +424,7 @@ body {
   border: 1px solid rgba(215, 181, 104, 0.3);
   border-radius: 8px;
   padding: 0.6rem 1.1rem;
-  min-width: 85px;
+  min-width: 90px;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -363,7 +439,7 @@ body {
 
 .unit-val {
   font-family: var(--font-hud);
-  font-size: 2.2rem;
+  font-size: 2.3rem;
   font-weight: 800;
   color: var(--dorado);
   letter-spacing: 2px;
@@ -421,6 +497,9 @@ body {
   letter-spacing: 1px;
 }
 
+/* --------------------------------------------------------------------------
+   LUNAR STAGE (ASTRONAUTA & BANDERA)
+   -------------------------------------------------------------------------- */
 .lunar-stage {
   position: relative;
   width: 100%;
@@ -599,6 +678,9 @@ body {
 .c4 { width: 28px; height: 10px; top: 60px; left: 78%; }
 .c5 { width: 75px; height: 26px; top: 25px; left: 88%; }
 
+/* --------------------------------------------------------------------------
+   SECCIONES INFORMATIVAS
+   -------------------------------------------------------------------------- */
 .section-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -903,6 +985,9 @@ body {
   padding: 0.8rem 1.8rem;
 }
 
+/* --------------------------------------------------------------------------
+   FOOTER CON LOGO PRINCIPAL
+   -------------------------------------------------------------------------- */
 .hud-footer {
   background: #060b13;
   border-top: 1px solid rgba(215, 181, 104, 0.25);
@@ -919,10 +1004,32 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.footer-logo {
-  height: 42px;
-  width: auto;
+.footer-brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   margin-bottom: 1rem;
+}
+
+.footer-logo {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: 1.5px solid var(--dorado);
+}
+
+.footer-title {
+  font-family: var(--font-hud);
+  font-size: 1.1rem;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.footer-sub {
+  font-family: var(--font-tech);
+  font-size: 0.75rem;
+  color: var(--naranja);
+  letter-spacing: 1.5px;
 }
 
 .footer-col p {
@@ -1013,10 +1120,10 @@ body {
 
 @media (max-width: 768px) {
   .nav-links { display: none; }
-  .hero-title { font-size: 2.8rem; }
+  .hero-title { font-size: 2.6rem; }
   .hero-slogan { font-size: 1.2rem; }
   .moon-flag-container { left: calc(50% + 90px); transform: scale(0.85); }
   .clock-display { gap: 0.4rem; }
   .clock-unit { min-width: 65px; padding: 0.4rem 0.6rem; }
-  .unit-val { font-size: 1.6rem; }
+  .unit-val { font-size: 1.5rem; }
 }

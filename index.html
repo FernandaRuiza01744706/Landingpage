@@ -15,9 +15,13 @@
   <!-- Barra de Navegación Espacial -->
   <header class="hud-header">
     <div class="nav-container">
-      <div class="brand">
-        <img src="assets/logo_horizontal.png" alt="SPACE TEC Logo" class="brand-logo">
-      </div>
+      <a href="#" class="brand">
+        <img src="assets/logo_principal.png" alt="SPACE TEC Emblema Oficial" class="brand-logo-main">
+        <div class="brand-text">
+          <span class="brand-title">SPACE TEC</span>
+          <span class="brand-subtitle">MISIÓN 2026</span>
+        </div>
+      </a>
 
       <nav class="nav-links">
         <a href="#mision">Misión</a>
@@ -56,6 +60,12 @@
         <span>MISIÓN FINAL • MISIÓN LUNAR 2026</span>
       </div>
 
+      <!-- LOGO PRINCIPAL DESTACADO EN EL HERO -->
+      <div class="hero-logo-showcase">
+        <div class="logo-orbit-ring"></div>
+        <img src="assets/logo_principal.png" alt="SPACE TEC - Logotipo Principal" class="hero-main-logo">
+      </div>
+
       <h1 class="hero-title">
         <span class="highlight-gold">SPACE</span> <span class="highlight-orange">TEC</span>
       </h1>
@@ -64,7 +74,7 @@
         "Más allá de la gravedad: el ingenio, la ciencia y el liderazgo que transforman el mañana."
       </p>
 
-      <!-- Panel de Reloj Futurista HUD & Conteo Regresivo -->
+      <!-- Panel de Reloj Futurista HUD & Conteo Regresivo Sereno y Preciso -->
       <div class="hud-clock-card" id="reloj-hud">
         <div class="hud-clock-header">
           <div class="hud-chip">T-MINUS MISSION CLOCK</div>
@@ -75,25 +85,26 @@
           </div>
         </div>
 
+        <!-- Visualizador de Reloj (Conteo constante a ritmo normal de 1 segundo) -->
         <div class="clock-display">
           <div class="clock-unit">
-            <span class="unit-val" id="clock-hours">00</span>
+            <span class="unit-val" id="clock-days">02</span>
+            <span class="unit-label">DÍAS</span>
+          </div>
+          <div class="clock-sep">:</div>
+          <div class="clock-unit">
+            <span class="unit-val" id="clock-hours">14</span>
             <span class="unit-label">HORAS</span>
           </div>
           <div class="clock-sep">:</div>
           <div class="clock-unit">
-            <span class="unit-val" id="clock-minutes">12</span>
+            <span class="unit-val" id="clock-minutes">30</span>
             <span class="unit-label">MINUTOS</span>
           </div>
           <div class="clock-sep">:</div>
-          <div class="clock-unit">
-            <span class="unit-val" id="clock-seconds">48</span>
-            <span class="unit-label">SEGUNDOS</span>
-          </div>
-          <div class="clock-sep">:</div>
           <div class="clock-unit highlight">
-            <span class="unit-val" id="clock-millis">92</span>
-            <span class="unit-label">MILIS</span>
+            <span class="unit-val" id="clock-seconds">00</span>
+            <span class="unit-label">SEGUNDOS</span>
           </div>
         </div>
 
@@ -102,7 +113,7 @@
             <span class="pulse-ring"></span>
             INICIAR CONTEO DE LANZAMIENTO (T-10)
           </button>
-          <span class="countdown-status" id="countdown-status-text">Listo para secuencia de despliegue</span>
+          <span class="countdown-status" id="countdown-status-text">Listo para secuencia de despliegue • Cadencia de 1 seg</span>
         </div>
       </div>
     </div>
@@ -150,7 +161,6 @@
           <circle cx="100" cy="74" r="38" fill="#FFFFFF" stroke="#14243B" stroke-width="4"/>
           <ellipse cx="100" cy="74" rx="28" ry="24" fill="url(#visorGradient)" stroke="#D7B568" stroke-width="3"/>
           
-          <!-- Gradiente del Visor -->
           <defs>
             <linearGradient id="visorGradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#14243B" />
@@ -159,12 +169,10 @@
             </linearGradient>
           </defs>
 
-          <!-- Reflejo brillante del visor -->
           <ellipse cx="94" cy="67" rx="14" ry="7" fill="#FFFFFF" opacity="0.45" transform="rotate(-15 94 67)"/>
           <circle cx="114" cy="75" r="4" fill="#FFFFFF" opacity="0.6"/>
         </svg>
 
-        <!-- Sombra en la superficie de la Luna -->
         <div class="astronaut-shadow"></div>
       </div>
 
@@ -363,9 +371,15 @@
   <!-- Footer con Identidad -->
   <footer class="hud-footer">
     <div class="footer-container">
-      <div class="footer-col">
-        <img src="assets/logo_horizontal.png" alt="SPACE TEC" class="footer-logo">
-        <p>Identidad visual oficial del equipo SPACE TEC. Diseñado para representar la vanguardia y el compromiso de las nuevas generaciones.</p>
+      <div class="footer-col brand-col">
+        <div class="footer-brand-badge">
+          <img src="assets/logo_principal.png" alt="SPACE TEC" class="footer-logo">
+          <div>
+            <h4 class="footer-title">SPACE TEC</h4>
+            <span class="footer-sub">INGENIERÍA & MISIÓN</span>
+          </div>
+        </div>
+        <p>Identidad visual oficial del equipo SPACE TEC. Diseñado para representar la vanguardia, excelencia técnica y el compromiso de las nuevas generaciones.</p>
       </div>
 
       <div class="footer-col">

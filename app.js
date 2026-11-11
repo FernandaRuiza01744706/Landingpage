@@ -1,9 +1,8 @@
 /**
- * SPACE TEC - HUD INTERACTION & WEB AUDIO SYNTHESIZER
- * Genera efectos sonoros futuristas y cuenta regresiva en tiempo real.
+ * SPACE TEC - HUD CLOCK & MISSION COUNTDOWN (1-Second Cadence)
+ * Sin parpadeo frenético: ritmo calmado y exacto de 1 segundo.
  */
 
-// Web Audio API Context
 let audioCtx = null;
 let soundEnabled = true;
 
@@ -17,18 +16,17 @@ function initAudio() {
   }
 }
 
-// Generador de tonos para cuenta regresiva (Beep futurista tipo telemetría espacial)
-function playBeep(freq = 880, duration = 0.12, type = 'sine') {
+// Sonido Beep nítido estilo NASA (1 cada segundo)
+function playBeep(freq = 880, duration = 0.1) {
   if (!soundEnabled) return;
   try {
     initAudio();
     const osc = audioCtx.createOscillator();
     const gainNode = audioCtx.createGain();
 
-    osc.type = type;
+    osc.type = 'sine';
     osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
 
-    // Envolvente de volumen rápida
     gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
     gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
 
@@ -42,7 +40,7 @@ function playBeep(freq = 880, duration = 0.12, type = 'sine') {
   }
 }
 
-// Efecto de ignición / lanzamiento exitoso
+// Sonido de ignición en T-0
 function playLaunchSound() {
   if (!soundEnabled) return;
   try {
@@ -52,8 +50,8 @@ function playLaunchSound() {
     const gainNode = audioCtx.createGain();
 
     osc.type = 'triangle';
-    osc.frequency.setValueAtTime(300, now);
-    osc.frequency.exponentialRampToValueAtTime(1400, now + 1.2);
+    osc.frequency.setValueAtTime(250, now);
+    osc.frequency.exponentialRampToValueAtTime(1200, now + 1.2);
 
     gainNode.gain.setValueAtTime(0.3, now);
     gainNode.gain.exponentialRampToValueAtTime(0.001, now + 1.4);
@@ -68,84 +66,85 @@ function playLaunchSound() {
   }
 }
 
-// Elementos del DOM
+// Elementos del reloj
+const daysEl = document.getElementById('clock-days');
 const hoursEl = document.getElementById('clock-hours');
 const minutesEl = document.getElementById('clock-minutes');
 const secondsEl = document.getElementById('clock-seconds');
-const millisEl = document.getElementById('clock-millis');
 const btnCountdown = document.getElementById('btn-countdown-trigger');
 const statusText = document.getElementById('countdown-status-text');
 const audioToggleBtn = document.getElementById('audio-toggle-btn');
 
-// Reloj continuo en tiempo real con milisegundos HUD
-let isSpecialCountdownRunning = false;
-let countdownSeconds = 10;
-let countdownTimer = null;
+let isLaunchSequenceRunning = false;
+let launchCountdown = 10;
+let launchInterval = null;
 
-function updateClock() {
-  if (isSpecialCountdownRunning) return;
+// Objetivo de entrega: cuenta regresiva real constante
+let totalSecondsRemaining = 2 * 86400 + 14 * 3600 + 30 * 60; // 2 días, 14 horas, 30 minutos
 
-  const now = new Date();
-  const hrs = String(now.getHours()).padStart(2, '0');
-  const mins = String(now.getMinutes()).padStart(2, '0');
-  const secs = String(now.getSeconds()).padStart(2, '0');
-  const ms = String(Math.floor(now.getMilliseconds() / 10)).padStart(2, '0');
+function renderClockValues(totalSecs) {
+  if (totalSecs < 0) totalSecs = 0;
+  const d = Math.floor(totalSecs / 86400);
+  const h = Math.floor((totalSecs % 86400) / 3600);
+  const m = Math.floor((totalSecs % 3600) / 60);
+  const s = Math.floor(totalSecs % 60);
 
-  if (hoursEl) hoursEl.textContent = hrs;
-  if (minutesEl) minutesEl.textContent = mins;
-  if (secondsEl) secondsEl.textContent = secs;
-  if (millisEl) millisEl.textContent = ms;
-
-  requestAnimationFrame(updateClock);
+  if (daysEl) daysEl.textContent = String(d).padStart(2, '0');
+  if (hoursEl) hoursEl.textContent = String(h).padStart(2, '0');
+  if (minutesEl) minutesEl.textContent = String(m).padStart(2, '0');
+  if (secondsEl) secondsEl.textContent = String(s).padStart(2, '0');
 }
-requestAnimationFrame(updateClock);
 
-// Manejador del Conteo Regresivo T-10 de Lanzamiento
+// Actualizar cada 1 segundo (1000 ms) EXACTO, sin carreras rápidas
+renderClockValues(totalSecondsRemaining);
+const normalClockInterval = setInterval(() => {
+  if (isLaunchSequenceRunning) return;
+  totalSecondsRemaining = Math.max(0, totalSecondsRemaining - 1);
+  renderClockValues(totalSecondsRemaining);
+}, 1000);
+
+// Secuencia interactiva de Lanzamiento T-10 (a ritmo de 1 segundo por paso)
 if (btnCountdown) {
   btnCountdown.addEventListener('click', () => {
     initAudio();
-    if (isSpecialCountdownRunning) return;
+    if (isLaunchSequenceRunning) return;
 
-    isSpecialCountdownRunning = true;
-    countdownSeconds = 10;
+    isLaunchSequenceRunning = true;
+    launchCountdown = 10;
     btnCountdown.disabled = true;
     btnCountdown.style.opacity = '0.6';
-    statusText.textContent = "¡SECUENCIA DE DESPEGUE INICIADA!";
+
+    statusText.textContent = "¡SECUENCIA DE IGNICIÓN INICIADA!";
     statusText.style.color = "var(--naranja)";
 
-    // Subdivisión de milisegundos durante conteo
-    let msCount = 99;
-    const msInterval = setInterval(() => {
-      msCount = (msCount - 3) < 0 ? 99 : msCount - 3;
-      if (millisEl) millisEl.textContent = String(msCount).padStart(2, '0');
-    }, 30);
+    // Fijamos días, horas y minutos en 00 para ver los 10 segundos
+    if (daysEl) daysEl.textContent = "00";
+    if (hoursEl) hoursEl.textContent = "00";
+    if (minutesEl) minutesEl.textContent = "00";
+    if (secondsEl) secondsEl.textContent = "10";
+    playBeep(800, 0.12);
 
-    countdownTimer = setInterval(() => {
-      if (hoursEl) hoursEl.textContent = "00";
-      if (minutesEl) minutesEl.textContent = "00";
-      if (secondsEl) secondsEl.textContent = String(countdownSeconds).padStart(2, '0');
+    launchInterval = setInterval(() => {
+      launchCountdown--;
 
-      if (countdownSeconds > 0) {
-        // Beep de cada segundo
-        playBeep(750 + (10 - countdownSeconds) * 45, 0.15, 'sawtooth');
-        statusText.textContent = `T-MINUS: ${countdownSeconds} SEGUNDOS...`;
-        countdownSeconds--;
+      if (launchCountdown > 0) {
+        if (secondsEl) secondsEl.textContent = String(launchCountdown).padStart(2, '0');
+        statusText.textContent = `T-MINUS: 00:00:0${launchCountdown} SEGUNDOS...`;
+        playBeep(700 + (10 - launchCountdown) * 50, 0.12);
       } else {
-        // T-0 Ignición
-        clearInterval(countdownTimer);
-        clearInterval(msInterval);
+        // T-0
+        clearInterval(launchInterval);
         if (secondsEl) secondsEl.textContent = "00";
-        if (millisEl) millisEl.textContent = "00";
-
         playLaunchSound();
-        statusText.textContent = "🚀 ¡DESPEGUE EXITOSO! MISIÓN EN ÓRBITA";
+
+        statusText.textContent = "🚀 ¡DESPEGUE EXITOSO! MISIÓN SPACE TEC EN ÓRBITA";
         statusText.style.color = "#4ade80";
 
-        // Efecto visual en el astronauta
+        // Animación suave de elevación del astronauta
         const astronaut = document.getElementById('astronaut');
         if (astronaut) {
-          astronaut.style.transition = "transform 2s cubic-bezier(0.25, 1, 0.5, 1)";
-          astronaut.style.transform = "translateX(-50%) translateY(-60px) scale(1.15)";
+          astronaut.style.transition = "transform 2.5s cubic-bezier(0.25, 1, 0.5, 1)";
+          astronaut.style.transform = "translateX(-50%) translateY(-65px) scale(1.15)";
           setTimeout(() => {
             astronaut.style.transform = "";
             astronaut.style.transition = "";
@@ -153,15 +152,15 @@ if (btnCountdown) {
         }
 
         setTimeout(() => {
-          isSpecialCountdownRunning = false;
+          isLaunchSequenceRunning = false;
           btnCountdown.disabled = false;
           btnCountdown.style.opacity = '1';
           statusText.textContent = "Secuencia completada. Telemetría nominal.";
           statusText.style.color = "var(--dorado)";
-          requestAnimationFrame(updateClock);
+          renderClockValues(totalSecondsRemaining);
         }, 4000);
       }
-    }, 1000);
+    }, 1000); // 1 segundo exacto
   });
 }
 
@@ -184,7 +183,7 @@ if (audioToggleBtn) {
   });
 }
 
-// Efecto parallax suave al mover el mouse en el Hero
+// Efecto parallax suave
 const hero = document.querySelector('.lunar-hero');
 const astronaut = document.getElementById('astronaut');
 
@@ -194,8 +193,8 @@ if (hero && astronaut) {
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
 
-    astronaut.style.marginLeft = `${x * 20}px`;
-    astronaut.style.marginTop = `${y * 15}px`;
+    astronaut.style.marginLeft = `${x * 18}px`;
+    astronaut.style.marginTop = `${y * 14}px`;
   });
 
   hero.addEventListener('mouseleave', () => {
