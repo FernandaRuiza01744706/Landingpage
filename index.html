@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPACE TEC | Proyecto Final de Misión</title>
+  <link rel="icon" type="image/png" href="assets/logo_principal.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Barra de Navegación Espacial -->
+  <header class="hud-header">
+    <div class="nav-container">
+      <div class="brand">
+        <img src="assets/logo_horizontal.png" alt="SPACE TEC Logo" class="brand-logo">
+      </div>
+
+      <nav class="nav-links">
+        <a href="#mision">Misión</a>
+        <a href="#modulos">Innovación</a>
+        <a href="#reloj-hud">Telemetría</a>
+        <a href="#tripulacion">Tripulación</a>
+        <a href="#entregables">Entregables</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="audio-toggle-btn" class="hud-btn audio-btn" title="Activar/Desactivar Sonido">
+          <span class="icon">🔊</span>
+          <span class="btn-text">AUDIO HUD</span>
+          <span class="status-indicator live"></span>
+        </button>
+        <a href="#entregables" class="cta-launch-btn">PROYECTO FINAL</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section: Escenario Lunar Interactivo -->
+  <section class="lunar-hero">
+    <!-- Capa de Estrellas y Cosmos -->
+    <div class="cosmos-bg">
+      <div class="stars-layer-1"></div>
+      <div class="stars-layer-2"></div>
+      <div class="stars-layer-3"></div>
+      <div class="nebula-dust"></div>
+      <div class="earth-distant"></div>
+    </div>
+
+    <!-- Contenedor Central del Hero -->
+    <div class="hero-content">
+      <div class="badge-pill">
+        <span class="badge-dot"></span>
+        <span>MISIÓN FINAL • MISIÓN LUNAR 2026</span>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="highlight-gold">SPACE</span> <span class="highlight-orange">TEC</span>
+      </h1>
+
+      <p class="hero-slogan">
+        "Más allá de la gravedad: el ingenio, la ciencia y el liderazgo que transforman el mañana."
+      </p>
+
+      <!-- Panel de Reloj Futurista HUD & Conteo Regresivo -->
+      <div class="hud-clock-card" id="reloj-hud">
+        <div class="hud-clock-header">
+          <div class="hud-chip">T-MINUS MISSION CLOCK</div>
+          <div class="telemetry-bar">
+            <span>ORBIT: LUNAR SYNCHRONOUS</span>
+            <span>ALT: 100.4 KM</span>
+            <span class="status-pulse">SYSTEM: ACTIVE</span>
+          </div>
+        </div>
+
+        <div class="clock-display">
+          <div class="clock-unit">
+            <span class="unit-val" id="clock-hours">00</span>
+            <span class="unit-label">HORAS</span>
+          </div>
+          <div class="clock-sep">:</div>
+          <div class="clock-unit">
+            <span class="unit-val" id="clock-minutes">12</span>
+            <span class="unit-label">MINUTOS</span>
+          </div>
+          <div class="clock-sep">:</div>
+          <div class="clock-unit">
+            <span class="unit-val" id="clock-seconds">48</span>
+            <span class="unit-label">SEGUNDOS</span>
+          </div>
+          <div class="clock-sep">:</div>
+          <div class="clock-unit highlight">
+            <span class="unit-val" id="clock-millis">92</span>
+            <span class="unit-label">MILIS</span>
+          </div>
+        </div>
+
+        <div class="clock-controls">
+          <button id="btn-countdown-trigger" class="hud-action-btn">
+            <span class="pulse-ring"></span>
+            INICIAR CONTEO DE LANZAMIENTO (T-10)
+          </button>
+          <span class="countdown-status" id="countdown-status-text">Listo para secuencia de despliegue</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Escena Lunar Interactiva: Superficie, Astronauta y Bandera -->
+    <div class="lunar-stage">
+      <!-- Astronauta Flotando en el Medio -->
+      <div class="astronaut-wrapper" id="astronaut">
+        <svg class="astronaut-svg" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Mochila propulsora (PLSS) -->
+          <rect x="52" y="70" width="96" height="95" rx="20" fill="#14243B" stroke="#D7B568" stroke-width="3"/>
+          <rect x="62" y="80" width="20" height="40" rx="6" fill="#F16B2F"/>
+          <rect x="118" y="80" width="20" height="40" rx="6" fill="#F16B2F"/>
+          <line x1="100" y1="70" x2="100" y2="45" stroke="#D7B568" stroke-width="3"/>
+          <circle cx="100" cy="42" r="5" fill="#F16B2F"/>
+
+          <!-- Cuerpo Traje Espacial -->
+          <ellipse cx="100" cy="130" rx="44" ry="46" fill="#F4F7FC" stroke="#14243B" stroke-width="4"/>
+          <!-- Pechera HUD -->
+          <rect x="80" y="112" width="40" height="26" rx="5" fill="#14243B"/>
+          <circle cx="90" cy="122" r="4" fill="#F16B2F"/>
+          <circle cx="102" cy="122" r="4" fill="#D7B568"/>
+          <circle cx="114" cy="122" r="4" fill="#48CAE4"/>
+
+          <!-- Piernas -->
+          <rect x="70" y="165" width="24" height="48" rx="10" fill="#E2E8F0" stroke="#14243B" stroke-width="4"/>
+          <rect x="106" y="165" width="24" height="48" rx="10" fill="#E2E8F0" stroke="#14243B" stroke-width="4"/>
+          <!-- Botas lunares -->
+          <path d="M64 212 C64 206 72 204 82 204 H96 C99 204 100 207 100 212 V220 H64 Z" fill="#14243B"/>
+          <path d="M104 212 C104 206 112 204 122 204 H136 C139 204 140 207 140 212 V220 H104 Z" fill="#14243B"/>
+          <line x1="64" y1="219" x2="100" y2="219" stroke="#D7B568" stroke-width="3"/>
+          <line x1="104" y1="219" x2="140" y2="219" stroke="#D7B568" stroke-width="3"/>
+
+          <!-- Brazos -->
+          <g class="arm-left">
+            <path d="M60 115 C45 125 38 145 42 165 C43 170 48 172 52 168 C58 152 64 138 72 130" fill="#E2E8F0" stroke="#14243B" stroke-width="4"/>
+            <circle cx="43" cy="172" r="8" fill="#14243B"/>
+          </g>
+          <g class="arm-right">
+            <path d="M140 115 C158 122 166 142 162 160 C160 166 154 168 150 164 C143 148 138 138 128 130" fill="#E2E8F0" stroke="#14243B" stroke-width="4"/>
+            <circle cx="160" cy="166" r="8" fill="#14243B"/>
+          </g>
+
+          <!-- Casco y Visor con Reflejo Lunar Dorado -->
+          <circle cx="100" cy="74" r="38" fill="#FFFFFF" stroke="#14243B" stroke-width="4"/>
+          <ellipse cx="100" cy="74" rx="28" ry="24" fill="url(#visorGradient)" stroke="#D7B568" stroke-width="3"/>
+          
+          <!-- Gradiente del Visor -->
+          <defs>
+            <linearGradient id="visorGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#14243B" />
+              <stop offset="50%" stop-color="#D7B568" />
+              <stop offset="85%" stop-color="#F16B2F" />
+            </linearGradient>
+          </defs>
+
+          <!-- Reflejo brillante del visor -->
+          <ellipse cx="94" cy="67" rx="14" ry="7" fill="#FFFFFF" opacity="0.45" transform="rotate(-15 94 67)"/>
+          <circle cx="114" cy="75" r="4" fill="#FFFFFF" opacity="0.6"/>
+        </svg>
+
+        <!-- Sombra en la superficie de la Luna -->
+        <div class="astronaut-shadow"></div>
+      </div>
+
+      <!-- Bandera ondeando en la luna con el escudo de Space Tec -->
+      <div class="moon-flag-container">
+        <div class="flag-pole"></div>
+        <div class="flag-cloth">
+          <div class="flag-wave-layer">
+            <div class="flag-emblem">
+              <span class="flag-title">SPACE TEC</span>
+              <span class="flag-sub">MISIÓN 2026</span>
+            </div>
+            <div class="flag-stripe"></div>
+          </div>
+        </div>
+        <div class="flag-base"></div>
+      </div>
+
+      <!-- Superficie Lunar con Cráteres y Relieve -->
+      <div class="moon-surface">
+        <div class="crater c1"></div>
+        <div class="crater c2"></div>
+        <div class="crater c3"></div>
+        <div class="crater c4"></div>
+        <div class="crater c5"></div>
+        <div class="moon-glow-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección 1: Bitácora de la Misión y Propósito -->
+  <section class="section-container" id="mision">
+    <div class="section-heading">
+      <span class="sub-label">// MISIÓN Y VISIÓN TÉCNICA</span>
+      <h2>PROPÓSITO DE LA MISIÓN</h2>
+      <div class="accent-rule"></div>
+    </div>
+
+    <div class="cards-grid mission-grid">
+      <div class="feature-card">
+        <div class="card-icon">🚀</div>
+        <h3>Ingeniería e Innovación</h3>
+        <p>
+          Diseño e integración de sistemas con enfoque metodológico riguroso. Modelamos soluciones de alto rendimiento sustentadas en principios físicos, optimización de recursos y tecnología espacial de vanguardia.
+        </p>
+      </div>
+
+      <div class="feature-card highlighted-border">
+        <div class="card-icon">🌱</div>
+        <h3>Compromiso y Sostenibilidad</h3>
+        <p>
+          Inspirados en la visión de la Agenda 2030 y el impacto comunitario: cada proceso y desarrollo busca la máxima eficiencia con un impacto social y ambiental medible, inspirando a futuras generaciones.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">🛰️</div>
+        <h3>Rigor Académico y Sistémico</h3>
+        <p>
+          Desarrollado en el marco universitario con estándares de excelencia, combinando cálculo matemático, física aplicada, algoritmia y visión de ingeniería industrial.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección 2: Módulos de Innovación / Pilares del Proyecto -->
+  <section class="section-container dark-module" id="modulos">
+    <div class="section-heading">
+      <span class="sub-label">// ARQUITECTURA DEL PROYECTO</span>
+      <h2>PILARES DE DESARROLLO</h2>
+      <div class="accent-rule"></div>
+    </div>
+
+    <div class="pillars-grid">
+      <div class="pillar-box">
+        <div class="pillar-num">01</div>
+        <h4>Dinámica y Física de Vuelo</h4>
+        <p>Modelado matemático de fuerzas, leyes de conservación de energía, trayectorias orbitales y análisis cinemático para navegación estable.</p>
+        <span class="pillar-tag">Física y Mecánica</span>
+      </div>
+
+      <div class="pillar-box">
+        <div class="pillar-num">02</div>
+        <h4>Algoritmos y Telemetría</h4>
+        <p>Estructuras lógicas de control, procesamiento de datos en tiempo real, monitoreo de subsistemas y automatización de eventos críticos.</p>
+        <span class="pillar-tag">Python & IoT Core</span>
+      </div>
+
+      <div class="pillar-box">
+        <div class="pillar-num">03</div>
+        <h4>Optimización de Sistemas</h4>
+        <p>Ingeniería de procesos enfocada en reducción de desperdicios energéticos, logística circular y fiabilidad estructural continua.</p>
+        <span class="pillar-tag">Ingeniería de Sistemas</span>
+      </div>
+
+      <div class="pillar-box">
+        <div class="pillar-num">04</div>
+        <h4>Impacto Humano y Liderazgo</h4>
+        <p>Gestión colaborativa del equipo, comunicación estratégica transparente y articulación de metas orientadas a la transformación social.</p>
+        <span class="pillar-tag">Liderazgo & Ética</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección 3: Tripulación / Equipo de Trabajo -->
+  <section class="section-container" id="tripulacion">
+    <div class="section-heading">
+      <span class="sub-label">// CAPITAL HUMANO</span>
+      <h2>TRIPULACIÓN SPACE TEC</h2>
+      <div class="accent-rule"></div>
+    </div>
+
+    <div class="crew-grid">
+      <div class="crew-card">
+        <div class="crew-avatar">
+          <div class="avatar-ring"></div>
+          <span class="avatar-emoji">👩‍🚀</span>
+        </div>
+        <div class="crew-badge">LIDERAZGO & SISTEMAS</div>
+        <h3>María Fernanda Ruiz García</h3>
+        <p class="crew-role">Dirección de Proyecto & Coordinación Técnica</p>
+        <p class="crew-desc">
+          Enfoque en resiliencia, gestión de ingeniería industrial, optimización de procesos sustentables y articulación comunitaria de alto impacto.
+        </p>
+        <div class="crew-tags">
+          <span>Ing. Industrial</span>
+          <span>Sistemas</span>
+          <span>Liderazgo 2030</span>
+        </div>
+      </div>
+
+      <div class="crew-card">
+        <div class="crew-avatar">
+          <div class="avatar-ring"></div>
+          <span class="avatar-emoji">👨‍🚀</span>
+        </div>
+        <div class="crew-badge">DESARROLLO & MODELADO</div>
+        <h3>Equipo de Ingeniería y Soporte</h3>
+        <p class="crew-role">Análisis Matemático & Telemetría</p>
+        <p class="crew-desc">
+          Integración de cálculos dinámicos, simulaciones numéricas, lógica algorítmica y aseguramiento de calidad técnica para la entrega final.
+        </p>
+        <div class="crew-tags">
+          <span>Cálculo & Física</span>
+          <span>Python</span>
+          <span>Diseño UX/UI</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección 4: Entregables del Proyecto Final -->
+  <section class="section-container deliverables-section" id="entregables">
+    <div class="section-heading">
+      <span class="sub-label">// DOCUMENTACIÓN DE ENTREGA</span>
+      <h2>EXPEDIENTE DE PROYECTO FINAL</h2>
+      <div class="accent-rule"></div>
+    </div>
+
+    <div class="deliverables-panel">
+      <div class="deliverable-item">
+        <div class="deliv-status check">✔ VALIDADO</div>
+        <h4>Reporte Técnico Integral</h4>
+        <p>Documentación con formulación de modelos, resolución matemática paso a paso y análisis de resultados.</p>
+      </div>
+
+      <div class="deliverable-item">
+        <div class="deliv-status check">✔ VALIDADO</div>
+        <h4>Código de Simulación y Pruebas</h4>
+        <p>Scripts modulares, pruebas de esfuerzo lógico y algoritmos de telemetría completamente documentados.</p>
+      </div>
+
+      <div class="deliverable-item">
+        <div class="deliv-status check">✔ VALIDADO</div>
+        <h4>Plataforma Web Desplegada</h4>
+        <p>Landing page responsiva de alta fidelidad, interactiva y lista para alojamiento en GitHub Pages.</p>
+      </div>
+
+      <div class="deliverable-item">
+        <div class="deliv-status ready">⚡ LISTO PARA EVALUACIÓN</div>
+        <h4>Manual de Identidad & Marca</h4>
+        <p>Aplicación rigurosa de paleta #14243B, #D7B568, #F16B2F y tipografía de estándares aeroespaciales.</p>
+      </div>
+    </div>
+
+    <!-- Banner de Cierre Inspirador -->
+    <div class="final-banner">
+      <div class="final-content">
+        <h3>"El futuro no se espera, se construye con ciencia, valor y propósito."</h3>
+        <p>Proyecto Final desarrollado con pasión y excelencia por el equipo SPACE TEC.</p>
+        <a href="#reloj-hud" class="hud-btn secondary-btn">VOLVER AL CENTRO DE CONTROL</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer con Identidad -->
+  <footer class="hud-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <img src="assets/logo_horizontal.png" alt="SPACE TEC" class="footer-logo">
+        <p>Identidad visual oficial del equipo SPACE TEC. Diseñado para representar la vanguardia y el compromiso de las nuevas generaciones.</p>
+      </div>
+
+      <div class="footer-col">
+        <h5>COLORES DE MISIÓN</h5>
+        <div class="palette-swatches">
+          <div class="swatch-item">
+            <span class="swatch-box" style="background:#14243B;"></span>
+            <span>Azul Espacial (#14243B)</span>
+          </div>
+          <div class="swatch-item">
+            <span class="swatch-box" style="background:#D7B568;"></span>
+            <span>Dorado Orbital (#D7B568)</span>
+          </div>
+          <div class="swatch-item">
+            <span class="swatch-box" style="background:#F16B2F;"></span>
+            <span>Naranja Impulso (#F16B2F)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5>DESPLIEGUE</h5>
+        <p>Optimizado para <strong>GitHub Pages</strong> con HTML5 semántico, CSS3 moderno con aceleración GPU y Web Audio API sin dependencias externas.</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>© 2026 SPACE TEC. Proyecto Final Académico. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
